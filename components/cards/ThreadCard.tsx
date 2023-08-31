@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
+import React from "react";
 
 interface Props {
   id: string;
@@ -39,6 +40,9 @@ function ThreadCard({
   comments,
   isComment,
 }: Props) {
+    // Split the content by newline characters
+    const contentArray = content.split('\n');
+
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -67,7 +71,16 @@ function ThreadCard({
               </h4>
             </Link>
 
-            <p className='mt-2 text-small-regular text-light-2'>{content}</p>
+            {/* <p className="mt-2 text-small-regular text-light-2">{content}</p> */}
+            <p className="mt-2 text-small-regular text-light-2">
+                {contentArray.map((line, index) => (
+                    // Render each line as a separate paragraph
+                    <React.Fragment key={index}>
+                        {line}
+                        <br />
+                    </React.Fragment>
+                ))}
+            </p>
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
