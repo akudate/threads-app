@@ -115,7 +115,7 @@ function ThreadCard({
                   className='cursor-pointer object-contain'
                 />
               </div>
-
+                
               {isComment && comments.length > 0 && (
                 <Link href={`/thread/${id}`}>
                   <p className='mt-1 text-subtle-medium text-gray-1'>
@@ -156,7 +156,13 @@ function ThreadCard({
           </Link>
         </div>
       )}
-
+      {!isComment && !community && (
+        <div className='mt-5 flex items-center'>
+          <p className='text-subtle-medium text-gray-1'>
+            {formatDateString(createdAt)}
+          </p>
+        </div>
+      )}
       {!isComment && community && (
         <Link
           href={`/communities/${community.id}`}
