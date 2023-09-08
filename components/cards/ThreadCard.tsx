@@ -3,7 +3,9 @@ import Link from "next/link";
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
-import React from "react";
+import React from 'react';
+import HeartIcon from "../buttons/HeartIcon";
+import ShareLink from "../buttons/ShareLink";
 
 interface Props {
   id: string;
@@ -42,7 +44,7 @@ function ThreadCard({
 }: Props) {
     // Split the content by newline characters
     const contentArray = content.split('\n');
-
+  
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -84,13 +86,7 @@ function ThreadCard({
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
-                <Image
-                  src='/assets/heart-gray.svg'
-                  alt='heart'
-                  width={24}
-                  height={24}
-                  className='cursor-pointer object-contain'
-                />
+                <HeartIcon src='/assets/heart-gray.svg' />
                 <Link href={`/thread/${id}`}>
                   <Image
                     src='/assets/reply.svg'
@@ -100,20 +96,14 @@ function ThreadCard({
                     className='cursor-pointer object-contain'
                   />
                 </Link>
-                <Image
-                  src='/assets/repost.svg'
-                  alt='heart'
-                  width={24}
-                  height={24}
-                  className='cursor-pointer object-contain'
-                />
-                <Image
+                <ShareLink id={id}/>
+                {/* <Image
                   src='/assets/share.svg'
                   alt='heart'
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
-                />
+                /> */}
               </div>
                 
               {isComment && comments.length > 0 && (

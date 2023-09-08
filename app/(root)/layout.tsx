@@ -10,6 +10,9 @@ import Bottombar from "@/components/shared/Bottombar";
 import RightSidebar from "@/components/shared/RightSidebar";
 import Topbar from "@/components/shared/Topbar";
 
+import { Toaster } from "@/components/ui/toaster";
+import { useToast, toast } from "@/components/ui/use-toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -35,7 +38,7 @@ export default function RootLayout({
           <main className='flex flex-row'>
             <LeftSidebar />
             <section className='main-container'>
-              <div className='w-full max-w-4xl'>{children}</div>
+              <div className='w-full max-w-4xl'>{children}</div><Toaster />
             </section>
             {/* @ts-ignore */}
             <RightSidebar />
