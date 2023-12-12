@@ -24,6 +24,7 @@ import { isBase64Image } from "@/lib/utils";
 
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   user: {
@@ -41,6 +42,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const { startUpload } = useUploadThing("media");
+  const { toast } = useToast();
 
   const [files, setFiles] = useState<File[]>([]);
 
@@ -209,7 +211,16 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
+        <Button 
+          type='submit' 
+          className='bg-primary-500'
+          onClick={() => {
+            toast({
+              variant: "success",
+              description: "Profile updated successfully",
+            })
+          }}
+        >
           {btnTitle}
         </Button>
       </form>

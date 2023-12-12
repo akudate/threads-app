@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import { deleteThread } from "@/lib/actions/thread.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   threadId: string;
@@ -22,6 +23,7 @@ function DeleteThread({
 }: Props) {
   const pathname = usePathname();
   const router = useRouter();
+  const { toast } = useToast();
 
   if (currentUserId !== authorId || pathname === "/") return null;
 
@@ -37,6 +39,10 @@ function DeleteThread({
         if (!parentId || !isComment) {
           router.push("/");
         }
+        toast({
+          variant: "destructive",
+          description: "Thread deleted successfully",
+        })
       }}
     />
   );

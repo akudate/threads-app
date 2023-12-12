@@ -2,12 +2,20 @@
 
 import React, { useState } from 'react';
 import { toast } from '@/components/ui/use-toast';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ShareLinkProps {
   id: string;
 }
 
 const ShareLink: React.FC<ShareLinkProps> = ({ id }) => {
+  const { toast } = useToast();
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
   const handleCopyLink = () => {
@@ -16,6 +24,10 @@ const ShareLink: React.FC<ShareLinkProps> = ({ id }) => {
     //     description: 'This is a success message.',
     //   });
     // Construct the URL to be copied
+    toast({
+      description: "Link copied successfully",
+    });
+
     const url = `/thread/${id}`;
 
     // Create a temporary input element to copy the URL to the clipboard
@@ -38,7 +50,6 @@ const ShareLink: React.FC<ShareLinkProps> = ({ id }) => {
       setCopySuccess(false);
     }, 5000);
   };
-
   return (
     <div>
       <img

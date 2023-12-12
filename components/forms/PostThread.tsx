@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   userId: string;
@@ -27,6 +28,7 @@ interface Props {
 function PostThread({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
+  const { toast } = useToast();
 
   const { organization } = useOrganization();
 
@@ -71,7 +73,16 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
+        <Button 
+          type='submit' 
+          className='bg-primary-500'
+          onClick={() => {
+            toast({
+              variant: "success",
+              description: "Thread created successfully",
+            })
+          }}
+        >
           Post Thread
         </Button>
       </form>

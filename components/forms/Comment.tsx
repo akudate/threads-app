@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 
 import { CommentValidation } from "@/lib/validations/thread";
 import { addCommentToThread } from "@/lib/actions/thread.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   threadId: string;
@@ -28,6 +29,7 @@ interface Props {
 
 function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   const pathname = usePathname();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof CommentValidation>>({
     resolver: zodResolver(CommentValidation),
@@ -76,7 +78,16 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
           )}
         />
 
-        <Button type='submit' className='comment-form_btn'>
+        <Button 
+          type='submit' 
+          className='comment-form_btn'
+          onClick={() => {
+            toast({
+              variant: "success",
+              description: "Thread created successfully",
+            })
+          }}
+        >
           Reply
         </Button>
       </form>
