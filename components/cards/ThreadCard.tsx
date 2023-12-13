@@ -12,6 +12,7 @@ interface Props {
   currentUserId: string;
   parentId: string | null;
   content: string;
+  image: string | null;
   author: {
     name: string;
     image: string;
@@ -36,6 +37,7 @@ function ThreadCard({
   currentUserId,
   parentId,
   content,
+  image,
   author,
   community,
   createdAt,
@@ -83,6 +85,18 @@ function ThreadCard({
                     </React.Fragment>
                 ))}
             </p>
+                
+            {image ? (
+              <Image
+                src={image}
+                alt='logo'
+                className='rounded-md mt-4'
+                width={750}
+                height={750}
+              />
+            ) : (
+              ""
+            )}
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
